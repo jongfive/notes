@@ -5,11 +5,6 @@ on:
       - main
       - feat/**
 
-env:
-  IMAGE_REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ env.GITHUB_REPOSITORY }}
-  IMAGE_TAG: latest
-
 jobs:
   build:
     runs-on: ubuntu-latest
