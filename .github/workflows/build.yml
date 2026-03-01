@@ -44,3 +44,9 @@ jobs:
           push: true
           tags: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           context: flask/
+      - name: Cleanup old images
+        uses: actions/delete-package-versions@v5
+        with:
+          package-type: container
+          package-name: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          delete-only-untagged-versions: true
