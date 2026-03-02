@@ -22,8 +22,10 @@ jobs:
         uses: actions/delete-package-versions@v5
         with:
           package-type: container
-          package-name: ghcr.io/jongfive/notes
+          owner: ${{ github.repository_owner }}
+          package-name: notes
           delete-only-untagged-versions: true
+          min-versions-to-keep: 3
       - name: Checkout
         uses: actions/checkout@v6
       - name: Install dependencies
