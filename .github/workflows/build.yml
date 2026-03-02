@@ -18,6 +18,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Cleanup old images
+        uses: actions/delete-package-versions@v5
+        with:
+          package-type: container
+          package-name: ghcr.io/jongfive/notes
+          delete-only-untagged-versions: true
       - name: Checkout
         uses: actions/checkout@v6
       - name: Install dependencies
@@ -44,9 +50,3 @@ jobs:
           push: true
           tags: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           context: flask/
-      - name: Cleanup old images
-        uses: actions/delete-package-versions@v5
-        with:
-          package-type: container
-          package-name: ghcr.io/jongfive/notes/cars-ms
-          delete-only-untagged-versions: true
