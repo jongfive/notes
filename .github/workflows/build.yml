@@ -48,5 +48,5 @@ jobs:
         uses: actions/delete-package-versions@v5
         with:
           package-type: container
-          package-name: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}
+          package-name: ghcr.io/jongfive/notes/cars-ms
           delete-only-untagged-versions: true
