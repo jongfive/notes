@@ -23,7 +23,7 @@ jobs:
         with:
           package-type: container
           owner: ${{ github.repository_owner }}
-          package-name: notes
+          package-name: notes/cars-ms
           delete-only-untagged-versions: true
           min-versions-to-keep: 3
       - name: Checkout
