@@ -1,0 +1,56 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  namespace: default
+  name: cars-ms
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cars-ms
+  template:
+    metadata:
+      labels:
+        app: cars-ms
+    spec:
+      imagePullSecrets:
+        - name: docker
+      containers:
+        - name: cars-ms
+          image: ghcr.io/jongfive/notes/cars-ms:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              protocol: TCP
+              containerPort: 5000
+          resources:
+            requests:
+              cpu: 200m
+              memory: 128Mi
+            limits:
+              cpu: 300m
+              memory: 192Mi
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+
+  strategy:
+    blueGreen:
+      activeService: cars-ms-active
+      previewService: cars-ms-preview
+      autoPromotionEnabled: true
+      autoPromotionSeconds: 60

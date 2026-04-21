@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name: cars-ms-active
+spec:
+  selector:
+    app: cars-ms
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name: cars-ms-preview
+spec:
+  selector:
+    app: cars-ms
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  
