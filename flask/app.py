@@ -8,6 +8,14 @@ cars = [
 
 app = Flask(__name__)
 
+@app.get("/health")
+def healthcheck():
+    return {
+        "status": "healthy",
+        "service": "cars-ms",
+        "version": "v1.0.0"
+    }
+
 @app.get("/api/v1/cars")
 def get_all_cars():
     return cars
