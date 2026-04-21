@@ -22,7 +22,8 @@ def get_all_cars():
 
 @app.get("/api/v1/cars/<int:id>")
 def get_car_by_id(id):
-    for c in cars:
-        if c["id"] == id:
-            return c
-    abort(404)
+    try:
+        return cars[id]
+    except IndexError:
+        app.logger.error(f"car with id={id} not found")
+        abort(404)
