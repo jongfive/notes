@@ -13,7 +13,7 @@ env:
   IMAGE_REGISTRY: ghcr.io
   IMAGE_OWNER: ${{ github.repository_owner }}
   IMAGE_NAME: ${{ github.event.repository.name }}/cars-ms
-  IMAGE_TAG: latest
+  IMAGE_TAG: v1.0.0
 
 jobs:
   build:
